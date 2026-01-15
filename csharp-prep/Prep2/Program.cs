@@ -31,10 +31,10 @@ class Program
             letter = "F";
         }
 
-        // 3. Imprimir el resultado de la letra
+        
         Console.WriteLine($"Your grade is: {letter}");
         
-        // 4. Determinar si aprobó (70 o más es aprobado)
+        
         if (percent >= 70)
         {
             Console.WriteLine("Congratulations! You passed the course.");
