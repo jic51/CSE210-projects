@@ -1,4 +1,4 @@
-// For the creativity part, I included a _mood attribute to capture user emotion, and implemented File.Exists() for better loading.
+// For the creativity part, I included a _mood a ttribute to capture user emotion, and implemented File.Exists() for better loading.
 
 
 class Program
@@ -38,7 +38,7 @@ class Program
 
                     // 2: Create a new Entry
                     Entry newEntry = new Entry();
-                    newEntry._date = DateTime.Now.ToShortDateString(); // Usando DateTime
+                    newEntry._date = DateTime.Now.ToShortDateString();
                     newEntry._promptText = prompt;
                     newEntry._entryText = response;
                     newEntry._mood = mood;

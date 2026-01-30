@@ -13,35 +13,36 @@ public class Journal
     {
         foreach (Entry e in _entries)
         {
-            e.Display(); // Usamos la abstracción de Entry
+            e.Display(); // we use the abstaction of Entry
         }
     }
 
     public void SaveToFile(string file)
     {
-        using (StreamWriter outputFile = new StreamWriter(file)) // Uso de StreamWriter
+        using (StreamWriter outputFile = new StreamWriter(file)) // StreamWriter for writing the file
         {
             foreach (Entry e in _entries)
             {
-                // Usamos un separador como "|" para facilitar la lectura después
-                outputFile.WriteLine($"{e._date}|{e._promptText}|{e._entryText}");
+                // we use a "|" for better saving/loading
+                outputFile.WriteLine($"{e._date}|{e._promptText}|{e._entryText}|{e._mood}");
             }
         }
     }
 
     public void LoadFromFile(string file)
     {
-        _entries.Clear(); // Limpiamos las entradas actuales antes de cargar
+        _entries.Clear(); 
         string[] lines = System.IO.File.ReadAllLines(file);
 
         foreach (string line in lines)
         {
-            string[] parts = line.Split("|"); // Dividimos la línea por el separador
+            string[] parts = line.Split("|"); // we use the "|" to split
 
             Entry newEntry = new Entry();
             newEntry._date = parts[0];
             newEntry._promptText = parts[1];
             newEntry._entryText = parts[2];
+            newEntry._mood = parts[3];
 
             _entries.Add(newEntry);
         }
