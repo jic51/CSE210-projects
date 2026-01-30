@@ -1,3 +1,6 @@
+// For the creativity part, I included a _mood attribute to capture user emotion, and implemented File.Exists() for better loading.
+
+
 class Program
 {
     static void Main(string[] args)
@@ -23,24 +26,24 @@ class Program
             switch (choice)
             {
                 case "1":
-                    // PASO 1: Obtener un prompt aleatorio
+                    // 1: Get an random prompt
                     string prompt = promptGenerator.GetRandomPrompt();
                     Console.WriteLine($"\n{prompt}");
                     Console.Write("> ");
                     string response = Console.ReadLine();
 
-                    // MEJORA: Preguntar por el ánimo
+                    // IMPROVE: ask for mood
                     Console.Write("How are you feeling today (1-10)? ");
                     string mood = Console.ReadLine();
 
-                    // PASO 2: Crear el objeto Entry
+                    // 2: Create a new Entry
                     Entry newEntry = new Entry();
                     newEntry._date = DateTime.Now.ToShortDateString(); // Usando DateTime
                     newEntry._promptText = prompt;
                     newEntry._entryText = response;
                     newEntry._mood = mood;
 
-                    // PASO 3: Guardar en el Journal
+                    // 3: save the entry to the journal
                     theJournal.AddEntry(newEntry);
                     break;
 
@@ -51,7 +54,7 @@ class Program
                 case "3":
                     Console.Write("What is the filename? ");
                     string loadFile = Console.ReadLine();
-                    if (File.Exists(loadFile)) // Verificación de seguridad
+                    if (File.Exists(loadFile))
                     {
                         theJournal.LoadFromFile(loadFile);
                     }
