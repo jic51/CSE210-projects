@@ -29,11 +29,11 @@ class Program
             fraction5.SetTop(topValue);
             fraction5.SetBottom(bottomValue);
 
-            Console.Write($"Fraction {i + 1}:");
+            Console.Write($"Fraction #{i + 1}:");
 
-            Console.Write($"string: {fraction5.GetFractionString()}, ");
+            Console.Write($" String: {fraction5.GetFractionString()},");
 
-            Console.Write($"Number: {fraction5.GetDecimalValue()}");
+            Console.Write($" Number: {fraction5.GetDecimalValue()}");
 
             i++;
             Console.WriteLine();
