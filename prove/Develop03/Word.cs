@@ -1,41 +1,40 @@
 public class Word
 {
-    // Atributos privados
+    // private attributes
     private string _text;
     private bool _isHidden;
 
-    // Constructor: Al principio, toda palabra nace visible (_isHidden = false)
+    // Constructor: all word her is visible (_isHidden = false)
     public Word(string text)
     {
         _text = text;
         _isHidden = false;
     }
 
-    // Método para ocultar la palabra
+    // hide the word
     public void Hide()
     {
         _isHidden = true;
     }
 
-    // Método para mostrar la palabra (por si acaso)
+    // we can show the word also
     public void Show()
     {
         _isHidden = false;
     }
 
-    // Método que nos dice si la palabra ya está oculta
+    // it tells us if the word is hidden or not
     public bool IsHidden()
     {
         return _isHidden;
     }
 
-    // El corazón de la lógica: ¿Cómo me muestro al mundo?
+    // how we show the word in the console
     public string GetDisplayText()
     {
         if (_isHidden)
         {
-            // Si está oculta, creamos una cadena de guiones del mismo largo que el texto
-            // Ejemplo: "Dios" -> "____"
+            // if it's hidden, we return underscores instead of the word.
             string underscores = "";
             foreach (char letter in _text)
             {

@@ -1,23 +1,22 @@
 public class Reference
 {
-    // 1. Atributos Privados (Encapsulación)
-    // Guardamos los datos bajo llave para que nadie los cambie por error.
+    // 1. private atributes
+    // save data about the reference: book, chapter, verse(s)
     private string _book;
     private int _chapter;
     private int _verse;
     private int _endVerse;
 
-    // 2. Constructor para un solo versículo (ej. Juan 3:16)
+    // 2. Constructor for one verse (John 3:16)
     public Reference(string book, int chapter, int verse)
     {
         _book = book;
         _chapter = chapter;
         _verse = verse;
-        _endVerse = verse; // Si es solo uno, el final es el mismo que el inicio.
+        _endVerse = verse;
     }
 
-    // 3. Constructor para un rango (ej. Proverbios 3:5-6)
-    // Nota que este tiene 4 parámetros en lugar de 3. C# sabe cuál usar.
+    // 3. Constructor for more than 1 verse (ej. Proverbs 3:5-6)
     public Reference(string book, int chapter, int startVerse, int endVerse)
     {
         _book = book;
@@ -26,8 +25,8 @@ public class Reference
         _endVerse = endVerse;
     }
 
-    // 4. Comportamiento (Abstracción)
-    // El mundo exterior solo pide "el texto", no le importa cómo lo armamos.
+    // 4.Abstracción
+    // it only asks for the data.
     public string GetDisplayText()
     {
         if (_verse == _endVerse)

@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 public class Scripture
 {
-    // 1. Atributos: Una escritura TIENE una referencia y una LISTA de palabras.
+    // 1. private  atributs
     private Reference _reference;
     private List<Word> _words = new List<Word>();
 
-    // 2. Constructor: Aquí sucede la "magia" de separar el texto.
+    // 2. Constructor: saparates the text into words
     public Scripture(Reference reference, string text)
     {
         _reference = reference;
         
-        // Separamos el texto por espacios para obtener cada palabra.
+        // we get each word separates by spaces.
         string[] splitWords = text.Split(' ');
 
-        // Por cada palabra del texto, creamos un nuevo objeto Word y lo metemos a la lista.
+        //we create a Word object for each word and we add it to the list of words.
         foreach (string w in splitWords)
         {
             Word newWord = new Word(w);
@@ -23,19 +23,19 @@ public class Scripture
         }
     }
 
-    // 3. Método para ocultar palabras al azar.
+    // 3. hide random words
     public void HideRandomWords(int numberToHide)
     {
         Random random = new Random();
         int hiddenCount = 0;
 
-        // Intentamos ocultar el número de palabras que nos pidieron.
-        // Pero primero revisamos si todavía hay palabras visibles.
+        // we hide the words until we hide the number of words we want.
+        
         while (hiddenCount < numberToHide && !IsCompletelyHidden())
         {
             int randomIndex = random.Next(_words.Count);
             
-            // Solo la ocultamos si no estaba oculta ya.
+            // only hide words if they are not already hidden.
             if (!_words[randomIndex].IsHidden())
             {
                 _words[randomIndex].Hide();
@@ -44,7 +44,7 @@ public class Scripture
         }
     }
 
-    // 4. Método para mostrar todo en pantalla.
+    // 4. we shiw all in the console
     public string GetDisplayText()
     {
         string scriptureText = "";
@@ -57,14 +57,14 @@ public class Scripture
         return $"{_reference.GetDisplayText()} {scriptureText.Trim()}";
     }
 
-    // 5. Método para saber si ya terminamos.
+    // 5. we check if we are done already
     public bool IsCompletelyHidden()
     {
         foreach (Word word in _words)
         {
             if (!word.IsHidden())
             {
-                return false; // Si encuentra una sola palabra visible, no está completa.
+                return false; // If we find a visible word, it's not completely hidden.
             }
         }
         return true;

@@ -1,37 +1,46 @@
 using System;
+using System.Collections.Generic;
 
 class Program
 {
     
     static void Main(string[] args)
     {
-        // 1. Preparamos la referencia y la escritura
-        Reference reference = new Reference("Juan", 3, 16);
-        string text = "Porque de tal manera amo Dios al mundo que ha dado a su Hijo unigenito";
-        Scripture scripture = new Scripture(reference, text);
+        // 1. Creamos nuestra "Biblioteca" de escrituras
+        List<Scripture> library = new List<Scripture>();
+
+        // Agregamos unas cuantas para tener variedad
+        library.Add(new Scripture(new Reference("John", 3, 16), "For God so loved the world that he gave his one and only Son"));
+        library.Add(new Scripture(new Reference("Proverbs", 3, 5, 6), "Trust in the Lord with all your heart and lean not on your own understanding"));
+        library.Add(new Scripture(new Reference("Philippians", 4, 13), "I can do all things through Christ who strengthens me"));
+
+        // 2. Elegimos una al azar
+        Random random = new Random();
+        int randomIndex = random.Next(library.Count);
+        Scripture selectedScripture = library[randomIndex];
 
         string input = "";
 
-        // 2. El bucle principal: se repite hasta que escriban 'quit' o todo esté oculto
-        while (input.ToLower() != "quit" && !scripture.IsCompletelyHidden())
+        // principle loop
+        while (input.ToLower() != "quit" && !selectedScripture.IsCompletelyHidden())
         {
-            Console.Clear(); // Limpia la pantalla para que parezca una app real
-            Console.WriteLine(scripture.GetDisplayText());
-            Console.WriteLine("\nPresiona Enter para ocultar palabras o escribe 'quit' para salir.");
+            Console.Clear(); // clean the console
+            Console.WriteLine(selectedScripture.GetDisplayText());
+            Console.WriteLine("\nPress Enter to hide words or type 'quit' to exit.");
             
             input = Console.ReadLine();
 
             if (input.ToLower() != "quit")
             {
-                scripture.HideRandomWords(3); // Oculta 3 palabras al azar cada vez
+                selectedScripture.HideRandomWords(3); // Hide 3 words each time
             }
         }
 
-        // Mensaje final si completó la memorización
-        if (scripture.IsCompletelyHidden())
+        // message if all words are hidden
+        if (selectedScripture.IsCompletelyHidden())
         {
             Console.Clear();
-            Console.WriteLine(scripture.GetDisplayText());
+            Console.WriteLine(selectedScripture.GetDisplayText());
             Console.WriteLine("\n¡Felicidades! Has ocultado todas las palabras.");
         }
     }
