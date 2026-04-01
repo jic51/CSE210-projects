@@ -1,56 +1,57 @@
-using System.Collections.Generic;
+using System;
 
-class Program
+class Program 
 {
-    static void Main(string[] args)
+    static void Main(string[] args) 
     {
-        // 1. Inicializar el motor de búsqueda
-        SearchEngine engine = new SearchEngine();
-        User currentUser = new User("Student Explorer");
+        SearchEngine searchEngine = new SearchEngine();
+        User user = new User("Student Explorer");
 
-        // 2. Crear datos de prueba (Objetos)
-        Address addr1 = new Address("123 Bark St", "Portland", "USA");
-        Accommodation hotel = new Accommodation("Paws Hotel", addr1.GetFullAddress(), 4.5, 25.0, true);
+        // Datos de ejemplo
+        Address hotelAddr = new Address("123 Bark St", "Portland", "USA");
+        Accommodation pawsHotel = new Accommodation("Paws Hotel", hotelAddr.GetFullAddress(), 4.5, 0, true);
         
-        Address addr2 = new Address("456 Park Ave", "Seattle", "USA");
-        Activity park = new Activity("Green Lake Park", addr2.GetFullAddress(), 5.0, true);
+        Address parkAddr = new Address("456 Green Way", "Seattle", "USA");
+        Activity coolPark = new Activity("Central Pet Park", parkAddr.GetFullAddress(), 4.8, true);
 
-        engine.AddPlace(hotel);
-        engine.AddPlace(park);
+        searchEngine.AddPlace(pawsHotel);
+        searchEngine.AddPlace(coolPark);
 
-        // 3. Menú de Interacción
-        bool running = true;
-        while (running)
+        bool isRunning = true;
+        while (isRunning) 
         {
             Console.WriteLine("\n--- 🐾 PET-FRIENDLY TRAVEL PLANNER ---");
             Console.WriteLine("1. View All Locations");
-            Console.WriteLine("2. Search by Type");
-            Console.WriteLine("3. Add to Favorites");
-            Console.WriteLine("4. View Favorites");
-            Console.WriteLine("5. Exit");
+            Console.WriteLine("2. Add Paws Hotel to Favorites");
+            Console.WriteLine("3. View Favorites");
+            Console.WriteLine("4. Exit");
             Console.Write("Select an option: ");
 
             string choice = Console.ReadLine();
 
-            switch (choice)
+            if (choice == "1") 
             {
-                case "1":
-                    foreach (var p in engine.GetAllPlaces()) Console.WriteLine(p.GetDetails());
-                    break;
-                case "2":
-                    Console.WriteLine("Searching for Parks...");
-                    var parks = engine.FilterByType<Activity>();
-                    foreach (var p in parks) Console.WriteLine(p.GetDetails());
-                    break;
-                case "3":
-                    currentUser.AddToFavorites(hotel);
-                    break;
-                case "4":
-                    currentUser.DisplayFavorites();
-                    break;
-                case "5":
-                    running = false;
-                    break;
+                foreach (Place p in searchEngine.GetAllPlaces()) 
+                {
+                    Console.WriteLine(p.GetDetails());
+                    Console.WriteLine($"   Pet Score: {p.CalculatePetScore()}");
+                }
+            }
+            else if (choice == "2") 
+            {
+                user.AddToFavorites(pawsHotel);
+            }
+            else if (choice == "3") 
+            {
+                user.DisplayFavorites();
+            }
+            else if (choice == "4") 
+            {
+                isRunning = false;
+            }
+            else 
+            {
+                Console.WriteLine("Invalid option.");
             }
         }
     }

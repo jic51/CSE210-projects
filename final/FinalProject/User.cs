@@ -1,27 +1,36 @@
+using System;
 using System.Collections.Generic;
 
-public class User
+public class User 
 {
     private string _name;
     private List<Place> _favorites = new List<Place>();
 
-    public User(string name)
+    public User(string name) 
     {
         _name = name;
     }
 
-    public void AddToFavorites(Place place)
+    public void AddToFavorites(Place place) 
     {
         _favorites.Add(place);
-        Console.WriteLine($"--- {place.GetDetails().Split('-')[0]} added to favorites! ---");
+        string placeName = place.GetDetails().Split('-')[0];
+        Console.WriteLine($"--- {placeName} added to favorites! ---");
     }
 
-    public void DisplayFavorites()
+    public void DisplayFavorites() 
     {
         Console.WriteLine($"\n⭐ {_name}'s Favorite Pet-Friendly Spots:");
-        foreach (var place in _favorites)
+        if (_favorites.Count == 0) 
         {
-            Console.WriteLine(place.GetDetails());
+            Console.WriteLine("No favorites added yet.");
+        }
+        else 
+        {
+            foreach (Place p in _favorites) 
+            {
+                Console.WriteLine(p.GetDetails());
+            }
         }
     }
 }
